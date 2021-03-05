@@ -36,7 +36,6 @@ const Layout = ({ children }) => {
       >
 
         <main>
-        {data.site.siteMetadata.description}
         {children}
         </main>
         <footer
