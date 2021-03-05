@@ -17,6 +17,7 @@ const Layout = ({ children }) => {
     query SiteTitleQuery {
       site {
         siteMetadata {
+          description
           title
         }
       }
@@ -25,7 +26,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
+      <Header siteTitle={data.site.siteMetadata?.title || `Title`} siteDescription={data.site.siteMetadata.description} />
       <div
         style={{
           margin: `0 auto`,
@@ -33,7 +34,11 @@ const Layout = ({ children }) => {
           padding: `0 1.0875rem 1.45rem`,
         }}
       >
-        <main>{children}</main>
+
+        <main>
+        {data.site.siteMetadata.description}
+        {children}
+        </main>
         <footer
           style={{
             marginTop: `2rem`,
