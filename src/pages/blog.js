@@ -7,6 +7,7 @@ import {MDXRenderer} from 'gatsby-plugin-mdx'
 const BlogPage = ({data}) => {
   return (
     <Layout pageTitle="My Blog Posts">
+      <h4>Total Posts: { data.allMdx.totalCount }</h4>
      <ul>
      { data.allMdx.nodes.map(node => {
         return(
@@ -28,6 +29,7 @@ const BlogPage = ({data}) => {
 export const query = (graphql`
   query BlogPosts {
     allMdx(sort: { order: DESC, fields: frontmatter___date }) {
+      totalCount
       nodes {
         frontmatter {
           date(formatString: "MMMM DD, YYYY")
