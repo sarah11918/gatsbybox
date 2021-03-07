@@ -9,7 +9,7 @@ const BlogPage = ({data}) => {
     <Layout pageTitle="My Blog Posts">
       <h4>Total Posts: { data.allMdx.totalCount }</h4>
      <ul>
-     { data.allMdx.nodes.map(node => {
+     { data.allMdx.nodes.map(({node}) => {
         return(
           <li key={node.slug}>
               <article>
