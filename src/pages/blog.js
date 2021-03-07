@@ -15,6 +15,9 @@ const BlogPage = ({data}) => {
               <article>
                 <h2>{node.frontmatter.title}</h2>
                 <p>Posted: {node.frontmatter.date}</p>
+                <p>{node.excerpt}</p>
+                <hr />
+                <h3>Full Post:</h3>
                 <MDXRenderer>{node.body}</MDXRenderer>
               </article>
               <hr />
@@ -31,6 +34,7 @@ export const query = (graphql`
     allMdx(sort: { order: DESC, fields: frontmatter___date }) {
       totalCount
       nodes {
+        excerpt(pruneLength: 25)
         frontmatter {
           date(formatString: "MMMM DD, YYYY")
           title
