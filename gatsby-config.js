@@ -5,7 +5,13 @@ module.exports = {
     author: `@sarah11918`
   },
   plugins: [
-    `gatsby-plugin-mdx`,
+    
+{
+  resolve:`gatsby-plugin-mdx`,
+  options: {
+      extensions: [`.md`,`.mdx`],
+  },
+},
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
     {
