@@ -21,8 +21,8 @@ const IndexPage = () => (
     />
     <p>
       <Link to="/page-2/">Go to page 2</Link> <br />
-      <Link to="/posts/">Go to blog posts</Link> <br />
-      <Link to="/blog/">Go to non-existant page for list of pages</Link>
+      <Link to="/blogposts/">Go to blog posts</Link> <br />
+      <Link to="/blogish/">Go to non-existant page for list of pages</Link>
     </p>
   </Layout>
 )

@@ -1,27 +1,24 @@
 import React from "react"
 import Layout from "../components/layout"
 import { Link, graphql } from "gatsby"
-import {MDXRenderer} from 'gatsby-plugin-mdx'
 
-
-const BlogPage = ({data}) => {
+export default function BlogPage ({data}) {
   
   return (
     <Layout pageTitle="My Blog Posts">
-      <h4>Total Posts: { data.allMdx.totalCount }</h4>
+      <h4>Total Posts: { data.allMarkdownRemark.totalCount }</h4>
      <ul>
-     { data.allMdx.nodes.map( node => {
+     { data.allMarkdownRemark.edges.map( ({node}) => {
   
         return(
-          <li key={node.slug}>
+          <li key={node.id}>
               <article>
-                <h2><Link to={`/${node.slug}/`}>{node.frontmatter.title}</Link></h2>
+                <h2><Link to={`/posts/${node.fields.slug}`}>{node.frontmatter.title}</Link></h2>
                 <p>Posted: {node.frontmatter.date}</p>
-                <p>{node.slug}</p>
+    
                 <p>{node.excerpt}</p>
                 <hr />
                 <h3>Full Post:</h3>
-                <MDXRenderer>{node.body}</MDXRenderer>
               </article>
               <hr />
             </li>
@@ -34,19 +31,23 @@ const BlogPage = ({data}) => {
 
 export const query = (graphql`
   query AllBlogPosts {
-    allMdx(sort: { order: DESC, fields: frontmatter___date }) {
-      totalCount
-      nodes {
-        excerpt(pruneLength: 25)
+  allMarkdownRemark {
+    totalCount
+    edges {
+      node {
+        id
         frontmatter {
-          date(formatString: "MMMM DD, YYYY")
+          date(formatString: "DD MMMM, YYYY")
           title
         }
-        body
-        slug
+        fields {
+          slug
+        }
+        excerpt
+        timeToRead
       }
     }
   }
+}
 `)
 
-  export default BlogPage
