@@ -29,7 +29,7 @@ export default function BlogPage ({data}) {
   )
 }
 
-export const query = (graphql`
+export const query = graphql(`
   query AllBlogPosts {
   allMarkdownRemark {
     totalCount
