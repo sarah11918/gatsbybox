@@ -5,42 +5,54 @@ module.exports = {
     author: `@sarah11918`
   },
   plugins: [
-    
-{
-  resolve:`gatsby-plugin-mdx`,
-  options: {
-      extensions: [`.md`,`.mdx`],
-  },
-},
+    `gatsby-transformer-remark`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `src`,
+        path: `${__dirname}/src/`,
+      },
+    }, 
+// {
+//   resolve:`gatsby-plugin-mdx`,
+//   options: {
+//       extensions: [`.md`,`.mdx`],
+ 
+//   },
+// },
+
+// {
+//   resolve: `gatsby-source-filesystem`,
+//   options: {
+//     name: `posts`,
+//     path: `${__dirname}/src/posts/`,
+//   },
+// },
+// {
+//   resolve: "gatsby-plugin-page-creator",
+//   options: {
+//     path: `${__dirname}/src/posts`,
+//   },
+// },
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `posts`,
-        path: `${__dirname}/src/posts/`,
-      },
-    },
-    {
-      resolve: "gatsby-plugin-page-creator",
-      options: {
-        path: `${__dirname}/src/posts`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: `${__dirname}/src/images`
-      }
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `pages`,
-        path: `${__dirname}/src/pages`
-      }
-    },
+
+  
+    // {
+    //   resolve: `gatsby-source-filesystem`,
+    //   options: {
+    //     name: `images`,
+    //     path: `${__dirname}/src/images`
+    //   }
+    // },
+    // {
+    //   resolve: `gatsby-source-filesystem`,
+    //   options: {
+    //     name: `pages`,
+    //     path: `${__dirname}/src/pages`
+    //   }
+    // },
+  
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {

@@ -5,41 +5,42 @@
  */
 
 // You can delete this file if you're not using it
-const path = require(`path`)
-const { createFilePath } = require(`gatsby-source-filesystem`)
+const path = require("path")
 
-exports.onCreateNode = ({ node, getNode, actions }) => {
+exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions
-  if (node.internal.type === `Mdx`) {
-    const slug = createFilePath({node, getNode, basePath: `pages`})
-    createNodeField({node, name:`slug`,value: slug})
+  if (node.internal.type === "MarkdownRemark") {
+    const slug = path.basename(node.fileAbsolutePath, ".md")
+    createNodeField({
+      node,
+      name: "slug",
+      value: slug,
+    })
   }
 }
 
-exports.createPages = async({graphql,actions}) => {
-  const {createPage} = actions
-  const result = await graphql(`
+exports.createPages = async ({ graphql, actions }) => {
+  const { createPage } = actions
+  const response = await graphql(`
     query {
-      allMdx{
-        
-          nodes{
-            fields{
+      allMarkdownRemark {
+        edges {
+          node {
+            fields {
               slug
             }
           }
-        
+        }
       }
     }
   `)
-
-    result.data.allMdx.nodes.forEach(({node}) => {
-        createPage({
-          path: `/posts/${node.fields.slug}`,
-          component:path.resolve(`./src/templates/blog-post.js`),
-          context: {
-            slug: node.fields.slug,
-          }
-        })
+  response.data.allMarkdownRemark.edges.forEach(edge => {
+    createPage({
+      path: `/posts/${edge.node.fields.slug}`,
+      component: path.resolve("./src/templates/blog-post.js"),
+      context: {
+        slug: edge.node.fields.slug,
+      },
     })
-      
+  })
 }
