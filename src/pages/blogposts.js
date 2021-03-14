@@ -15,7 +15,7 @@ const BlogPage = ({data}) => {
         return(
           <li key={node.slug}>
               <article>
-                <h2><Link to={node.slug}>{node.frontmatter.title}</Link></h2>
+                <h2><Link to={`/${node.slug}/`}>{node.frontmatter.title}</Link></h2>
                 <p>Posted: {node.frontmatter.date}</p>
                 <p>{node.slug}</p>
                 <p>{node.excerpt}</p>

@@ -21,20 +21,20 @@ exports.createPages = async({graphql,actions}) => {
   const result = await graphql(`
     query {
       allMdx{
-        edges{
-          node{
+        
+          nodes{
             fields{
               slug
             }
           }
-        }
+        
       }
     }
   `)
 
-    result.data.allMdx.edges.forEach(({node}) => {
+    result.data.allMdx.nodes.forEach(({node}) => {
         createPage({
-          path: node.fields.slug,
+          path: `/posts/${node.fields.slug}`,
           component:path.resolve(`./src/templates/blog-post.js`),
           context: {
             slug: node.fields.slug,
